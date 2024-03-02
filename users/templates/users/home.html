@@ -1,0 +1,31 @@
+<head>
+    <style>
+    
+        body{
+            text-align: center;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать, {{ user.username|default:'Гость' }}</h1>
+    
+    <div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Выйти</a>
+        <a href="{% url 'add_post' %}">POST</a>
+        {% else %}
+        <a href="{% url 'signup' %}">Загеристрироваться</a>
+        <a href="{% url 'login' %}">Войти</a>
+        {% endif %}
+    </div>
+</body>
+
+
+{% comment urls %}
+{% url 'signup' %}
+{% endcomment %}
+
+{% for post in posts %}
+<p>{{ post.title }}</p>
+{% endfor %}

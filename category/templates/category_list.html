@@ -1,0 +1,8 @@
+<h1>Category List</h1>
+    <ul>
+        {% for category in categories %}
+            <li>{{ category.name }}</li>
+            <a href="{% url 'edit_category' category.id %}">Edit</a>
+            <a href="{% url 'delete_category' category.id %}">Delete</a>
+        {% endfor %}
+    </ul>
