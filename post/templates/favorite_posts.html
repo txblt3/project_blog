@@ -3,21 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <title>Favorite Posts</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f9f9f9;
-        }
-
         .header {
             background-color: #fff;
             padding: 20px;
@@ -65,58 +52,75 @@
         .register:hover {
             background-color: #0056b3;
         }
-
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 0 20px;
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 80px), 1fr));
+            gap: 20px;
         }
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #333;
+        .card img {
+            max-width: 500px;
+            height: auto;
+            max-height: 200px; 
+            border-bottom: 1px solid #dddddd;
         }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
         }
 
-        button[type="submit"] {
+        .card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .card .info {
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .category {
+            display: inline-block;
             background-color: #007bff;
-            color: #fff;
+            color: #ffffff;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .card .actions {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #dddddd;
+        }
+
+        .card .actions button {
+            background-color: #007bff;
+            color: #ffffff;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border-radius: 4px;
-            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        button[type="submit"]:hover {
+        .card .actions button:hover {
             background-color: #0056b3;
         }
     </style>
-    <title>Edit Category</title>
 </head>
 <body>
     <div class="header">
@@ -139,11 +143,32 @@
             {% endif %}
         </div>
     </div>
-<div class="container">
-    <h1>Edit Category</h1>
-    <form action="{% url 'edit_category' id=category.id %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-</div>
+
+    <h1>Favorite Posts</h1>
+    <div class="cards">
+        {% for favorite_post in favorite_posts %}      
+        <div class="card">
+            <img src="https://picsum.photos/200/300" alt="random image from picusm">
+            <h3>{{ favorite_post.post.title }}</h3>
+            <div class="info">
+                {% if favorite_post.post.content|wordcount > 20 %}
+                <p><strong>Описание: </strong>{{ favorite_post.post.content|truncatewords:20 }}...</p>
+                {% else %}
+                <p><strong>Описание: </strong>{{ favorite_post.post.content }}</p>
+                {% endif %}
+                <p><strong>Создатель:</strong> {{ favorite_post.post.author.username }}</p>
+                <p><strong>Дата:</strong> {{ favorite_post.post.date_posted }}</p>
+                <p><strong>Категории:</strong> 
+                    {% for category in favorite_post.post.categories.all %}
+                    <span class="category">{{ category.name }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="actions">
+                <button><a href="{% url 'post_details' post_id=favorite_post.post.id %}" style="text-decoration: none; color: inherit;">Learn more</a></button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

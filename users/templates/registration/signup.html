@@ -1,22 +1,85 @@
-{% block title %}Registration{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Registration{% endblock %}</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
 
-{% block content %}
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-<h2>Registration</h2>
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td>
-                <input type="submit" value="Зарегистрироваться">
-            </td>
-        </tr>
-    </table>
-</form>
+        table {
+            width: 100%;
+        }
 
-<a href="{% url 'login' %}">На страницу авторизации</a>
-<a href="{% url 'home' %}">На главную страницу</a>
+        table tr td {
+            padding: 10px;
+        }
 
-{% endblock %}
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registration</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td>
+                    <input type="submit" value="Зарегистрироваться">
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+    <a href="{% url 'login' %}" class="link">На страницу авторизации</a>
+    <a href="{% url 'home' %}" class="link">На главную страницу</a>
+</div>
+
+</body>
+</html>

@@ -20,6 +20,21 @@ class Post(models.Model):
 
     categories = models.ManyToManyField(Category,
                                         related_name='posts')
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'id': self.id})
+
+
+
+class FavoritePost(models.Model):
+    user = models.ForeignKey(User, 
+                            on_delete=models.CASCADE)
+
+    post = models.ForeignKey('Post', 
+                            on_delete=models.CASCADE)
+        
+    class Meta:
+        verbose_name_plural = 'Избранные посты'
+        verbose_name = 'Избранный пост'

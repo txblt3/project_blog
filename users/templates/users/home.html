@@ -1,31 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
     <style>
-    
-        body{
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav ul {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav li {
+            list-style: none;
+        }
+
+        .login,
+        .register {
+            background-color: #0080FF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .login:hover,
+        .register:hover {
+            background-color: #0056b3;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 300px;
+            height: 40px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+            
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            width: 1600px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 80px), 1fr));
+            gap: 20px;
+        }
+
+        .card img {
+            max-width: 500px;
+            height: auto;
+            max-height: 200px; 
+            border-bottom: 1px solid #dddddd;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .card .info {
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .category {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .card .actions {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #dddddd;
+        }
+
+        .card .actions button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card .actions button:hover {
+            background-color: #0056b3;
+        }
+        .filter-form {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .filter-form label {
+            margin-right: 10px;
+        }
+
+        .filter-form select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .filter-form button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 30px;
+        }
+
+        .filter-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer{
+            background:#000;
+            padding:30px 0px;
+            font-family: 'Play', sans-serif;
+            text-align:center;
+        }
+            
+        .footer .row{
+            width:100%;
+            margin:1% 0%;
+            padding:0.6% 0%;
+            color:gray;
+            font-size:0.8em;
+        }
+            
+        .footer .row a{
+            text-decoration:none;
+            color:gray;
+            transition:0.5s;
+        }
+            
+        .footer .row a:hover{
+            color:#fff;
+        }
+            
+        .footer .row ul{
+            width:100%;
+        }
+            
+        .footer .row ul li{
+            display:inline-block;
+            margin:0px 30px;
+        }
+            
+        .footer .row a i{
+            font-size:2em;
+            margin:0% 1%;
+        }
+            
+        @media (max-width:720px){
+            .footer{
+            text-align:left;
+            padding:5%;
+            }
+            .footer .row ul li{
+            display:block;
+            margin:10px 0px;
+            text-align:left;
+            }
+            .footer .row a i{
+            margin:0% 3%;
+            }
+            }
+
     </style>
+    <title>Home</title>
 </head>
 <body>
-    <h1>Добро пожаловать, {{ user.username|default:'Гость' }}</h1>
-    
-    <div>
-        {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Выйти</a>
-        <a href="{% url 'add_post' %}">POST</a>
-        {% else %}
-        <a href="{% url 'signup' %}">Загеристрироваться</a>
-        <a href="{% url 'login' %}">Войти</a>
-        {% endif %}
+
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="#">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{% url 'home' %}" style="text-decoration: none; color: inherit;"></a></li>
+                <li><a href="{% url 'add_post' %}" style="text-decoration: none; color: inherit;">Добавить пост</a></li>
+                <li><a href="{% url 'category_list' %}" style="text-decoration: none; color: inherit;">Категории</a></li>
+                <li><a href="{% url 'favorite_posts' %}" style="text-decoration: none; color: inherit;" >Избранные посты</a></li>
+                {{ user.username|default:'Гость' }}
+            </ul>
+            {% if user.is_authenticated %}
+            <button class="login"><a href="{% url 'logout' %} " style="text-decoration: none; color: inherit;">Выйти</a></button>
+            {% else %}
+            <button class="login"><a href="{% url 'signup' %}" style="text-decoration: none; color: inherit;">Зарегистрироваться</a></button>
+            <button class="login"><a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">Войти</a></button>
+            {% endif %}
+        </div>
+        <div class="search-form">
+            <form method="get" action="{% url 'search_posts' %}">
+                <input class="search-input" type="text" name="q" value="{{ query }}" placeholder="Поиск...">
+                <button class="search-button" type="submit">Найти</button>
+            </form>
+        </div>
     </div>
-</body>
+
+    <div class="container">
+        <!-- Форма для фильтрации по категориям -->
+        <form class="filter-form" method="get" action="{% url 'filterByCategory' %}">
+            <label for="category">Фильтровать по категориям:</label>    
+            <select name="category" id="category">
+                <option value="">Все</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Применить фильтр</button>
+        </form>
+
+        <!-- Вывод постов -->
+        <div class="cards">
+            {% for post in posts %}        
+            <div class="card">
+                <img src="https://picsum.photos/200/300" alt="random image from picusm">
+                <h3>{{ post.title }}</h3>
+                <div class="info">
+                    {% if post.content|wordcount > 20 %}
+                    <p><strong>Описание: </strong>{{ post.content|truncatewords:20 }}...</p>
+                    {% else %}
+                    <p><strong>Описание: </strong>{{ post.content }}</p>
+                    {% endif %}
+                    <p><strong>Создатель:</strong> {{ post.author.username }}</p>
+                    <p><strong>Дата:</strong> {{ post.date_posted }}</p>
+                    <p><strong>Категории:</strong> 
+                        {% for category in post.categories.all %}
+                        <span class="category">{{ category.name }}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="actions">
+                    <button><a href="{% url 'post_details' post.id %}" style="text-decoration: none; color: inherit;">Learn more</a></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
 
-{% comment urls %}
-{% url 'signup' %}
-{% endcomment %}
+        <footer>
+            <div class="footer">
+                <div class="row">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </div>
+    
+                <div class="row">
+                    <ul>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Career</a></li>
+                    </ul>
+                </div >
+    
+                <div class="row">
+                INFERNO Copyright © 2021 Inferno - All rights reserved || Designed By: Amina
+                </div>
+            </div>
+        </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-{% for post in posts %}
-<p>{{ post.title }}</p>
-{% endfor %}
+</body> 
+</html>

@@ -1,8 +1,168 @@
-<h1>Category List</h1>
-    <ul>
-        {% for category in categories %}
-            <li>{{ category.name }}</li>
-            <a href="{% url 'edit_category' category.id %}">Edit</a>
-            <a href="{% url 'delete_category' category.id %}">Delete</a>
-        {% endfor %}
-    </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav ul {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav li {
+            list-style: none;
+        }
+
+        .login,
+        .register {
+            background-color: #0080FF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .login:hover,
+        .register:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            width: 1300px;
+            margin: auto;
+        }
+
+        .category-list {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-item {
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-item a {
+            color: #0080FF;
+            text-decoration: none;
+        }
+
+        .category-item a:hover {
+            text-decoration: underline;
+            text-decoration-color: red;
+        }
+
+        .create-category {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .create-category button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .create-category button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <title>Category List</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="#">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{% url 'home' %}" style="text-decoration: none; color: inherit;">Home</a></li>
+                <li><a href="{% url 'add_post' %}" style="text-decoration: none; color: inherit;">Добавить пост</a></li>
+                <li><a href="{% url 'category_list' %}" style="text-decoration: none; color: inherit;">Категории</a></li>
+                <li><a href="{% url 'favorite_posts' %}" style="text-decoration: none; color: inherit;">Избранные посты</a></li>
+                {{ user.username|default:'Гость' }}
+            </ul>
+            {% if user.is_authenticated %}
+            <button class="login"><a href="{% url 'logout' %} " style="text-decoration: none; color: inherit;">Выйти</a></button>
+            {% else %}
+            <button class="login"><a href="{% url 'signup' %}" style="text-decoration: none; color: inherit;">Зарегистрироваться</a></button>
+            <button class="login"><a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">Войти</a></button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="category-list">
+            <h1>Category List</h1>
+            <ul>
+                {% for category in categories %}
+                    <li class="category-item">
+                        <span>{{ category.name }}</span>
+                        <div>
+                            <a class="edit" href="{% url 'edit_category' category.id %}" style="text-decoration: none; color: inherit;"> Edit</a>
+                            <a class="delete" href="{% url 'delete_category' category.id %}" style="text-decoration: none; color: inherit;">Delete</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="create-category">
+            <button><a href="{% url 'create_category' %}" style="text-decoration: none; color: inherit;">Создать категорию</a></button>
+        </div>
+    </div>
+
+</body> 
+</html>

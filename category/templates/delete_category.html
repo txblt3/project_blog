@@ -1,6 +1,145 @@
-<h1>Delete Category</h1>
-<p>Are you sure you want to delete category "{{ category.name }}"?</p>
-<form action="{% url 'delete_category' category.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka One', sans-serif;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav ul {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav li {
+            list-style: none;
+        }
+
+        .login,
+        .register {
+            background-color: #0080FF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .login:hover,
+        .register:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"] {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #c82333;
+        }
+    </style>
+    <title>Delete Category</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <img src="logo.png" alt="#">
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{% url 'home' %}" style="text-decoration: none; color: inherit;">Home</a></li>
+                <li><a href="{% url 'add_post' %}" style="text-decoration: none; color: inherit;">Добавить пост</a></li>
+                <li><a href="{% url 'category_list' %}" style="text-decoration: none; color: inherit;">Категории</a></li>
+                <li><a href="{% url 'favorite_posts' %}" style="text-decoration: none; color: inherit;">Избранные посты</a></li>
+                {{ user.username|default:'Гость' }}
+            </ul>
+            {% if user.is_authenticated %}
+            <button class="login"><a href="{% url 'logout' %} " style="text-decoration: none; color: inherit;">Выйти</a></button>
+            {% else %}
+            <button class="login"><a href="{% url 'signup' %}" style="text-decoration: none; color: inherit;">Зарегистрироваться</a></button>
+            <button class="login"><a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">Войти</a></button>
+            {% endif %}
+        </div>
+    </div>
+<div class="container">
+    <h1>Delete Category</h1>
+    <p>Are you sure you want to delete category "{{ category.name }}"?</p>
+    <form action="{% url 'delete_category' category.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</div>
+
+</body>
+</html>
